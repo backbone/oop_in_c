@@ -18,7 +18,7 @@ typedef struct Square_interface
 
 } Square_interface;
 
-void Square_constructor (void *this);
+void Square_constructor (void *this, double a);
 void Square_destructor (void *this);
 void Square_copy (void *to, void *from);
 void* Square_clone (void *this);
@@ -38,6 +38,6 @@ typedef struct Square
 
 } Square;
 
-void* Square_new ();
+void* Square_new (double a);
 
 #endif // __SQUARE_H__

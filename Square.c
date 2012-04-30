@@ -2,11 +2,12 @@
 
 #include "Square.h"
 
-void Square_constructor (void *this)
+void Square_constructor (void *this, double a)
 {
-  printf ("Square_constructor (%lu) called\n",
-          (unsigned long) this);
-  ((Square *) this)->a = 0.0;
+  printf ("Square_constructor (%lu, %f) called\n",
+          (unsigned long) this,
+          a);
+  ((Square *) this)->a = a;
 }
 
 void Square_destructor (void *this)
@@ -25,7 +26,7 @@ void Square_copy (void *to, void *from)
 
 void* Square_clone (void *this)
 {
-  Square *square = Square_new ();
+  Square *square = Square_new (0.0);
   printf ("Square_clone (%lu) called\n",
           (unsigned long) this);
   Square_copy (square, this);
@@ -97,7 +98,7 @@ double Square_diag_length (void *this)
 }
 
 /* public */
-void* Square_new ()
+void* Square_new (double a)
 {
   static Square_interface vtable =
     {
@@ -111,7 +112,10 @@ void* Square_new ()
     };
   Square *square = malloc (sizeof (*square));
 
-  printf ("Square_new () returns %lu\n",
+  Square_constructor (square, a);
+
+  printf ("Square_new (%f) returns %lu\n",
+          a,
           (unsigned long) square); 
 
   square->vtable = (void *) &vtable;

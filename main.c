@@ -8,8 +8,8 @@ int main (int argc, char *argv[])
   int i = 0;
   Figure *fig[3];
 
-  fig[0] = Square_new ();
-  fig[1] = ColoredSquare_new ();
+  fig[0] = Square_new (1);
+  fig[1] = ColoredSquare_new (2, 2);
 
   ((ColoredSquare *) fig[1])->vtable->set_color (fig[1], 5);
   ((Square *) fig[0])->vtable->resize (fig[0], 2);

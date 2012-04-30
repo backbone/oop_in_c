@@ -1,13 +1,18 @@
 #include <stdlib.h>
+#include <assert.h>
 
 #include "ColoredSquare.h"
 
-void ColoredSquare_constructor (void *this)
+void ColoredSquare_constructor (void *this,
+                                double a,
+                                int color)
 {
-  printf ("ColoredSquare_constructor (%lu) called\n",
-          (unsigned long) this);
-  Square_constructor (this);
-  ((ColoredSquare *) this)->color = 0;
+  printf ("ColoredSquare_constructor (%lu, %f, %d) called\n",
+          (unsigned long) this,
+          a,
+          color);
+  Square_constructor (this, a);
+  ((ColoredSquare *) this)->color = color;
 }
 
 void ColoredSquare_copy (void *to, void *from)
@@ -21,7 +26,7 @@ void ColoredSquare_copy (void *to, void *from)
 
 void* ColoredSquare_clone (void *this)
 {
-  ColoredSquare *csquare = ColoredSquare_new ();
+  ColoredSquare *csquare = ColoredSquare_new (0.0, 0);
   printf ("ColoredSquare_clone (%lu) called\n",
           (unsigned long) this);
   ColoredSquare_copy (csquare, this);
@@ -62,7 +67,7 @@ void ColoredSquare_set_color (void *this, int color)
 }
 
 /* public */
-void* ColoredSquare_new ()
+void* ColoredSquare_new (double a, int color)
 {
   static ColoredSquare_interface vtable =
     {
@@ -77,7 +82,11 @@ void* ColoredSquare_new ()
     };
   ColoredSquare *square = malloc (sizeof (*square));
 
-  printf ("ColoredSquare_new () returns %lu\n",
+  ColoredSquare_constructor (square, a, color);
+
+  printf ("ColoredSquare_new (%f, %d) returns %lu\n",
+          a,
+          color,
           (unsigned long) square); 
 
   square->vtable = (void *) &vtable;
