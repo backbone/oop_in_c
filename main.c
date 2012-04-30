@@ -20,7 +20,9 @@ int main (int argc, char *argv[])
 
   for (i = 0; i < sizeof (fig) / sizeof (Figure *); i++)
     {
-      printf ("--- type = %s ---\n", fig[i]->vtable->type (fig[i]));
+      puts ("---");
+
+      printf ("type = %s\n", fig[i]->vtable->type (fig[i]));
 
       fig[i]->vtable->draw (fig[i]);
 
@@ -31,10 +33,8 @@ int main (int argc, char *argv[])
       printf ("diag_length(%lu) = %f\n",
               (unsigned long) fig[i],
               ((Square *) fig[i])->vtable->diag_length (fig[i]));
-
-      puts ("---\n");
-
     }
+    puts ("---");
 
 /*goto end;
 err:
