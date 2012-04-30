@@ -5,7 +5,8 @@
 
 int main (int argc, char *argv[])
 {
-  Figure *fig[2];
+  int i = 0;
+  Figure *fig[3];
 
   fig[0] = Square_new ();
   fig[1] = ColoredSquare_new ();
@@ -14,19 +15,25 @@ int main (int argc, char *argv[])
   ((Square *) fig[0])->vtable->resize (fig[0], 2);
   ((Square *) fig[1])->vtable->resize (fig[0], 3);
 
-  fig[0]->vtable->draw (fig[0]);
-  fig[1]->vtable->draw (fig[1]);
+  fig[2] = fig[1]->vtable->clone (fig[1]);
+  ((ColoredSquare *) fig[2])->vtable->set_color (fig[2], 3);
 
-  printf ("area(%lu) = %f\n",
-          (unsigned long) fig[0],
-          fig[0]->vtable->area (fig[0]));
-  printf ("area(%lu) = %f\n",
-          (unsigned long) fig[1],
-          fig[1]->vtable->area (fig[1]));
+  for (i = 0; i < sizeof (fig) / sizeof (Figure *); i++)
+    {
+      printf ("--- type = %s ---\n", fig[i]->vtable->type (fig[i]));
 
-  printf ("diag_length(%lu) = %f\n",
-          (unsigned long) fig[0],
-          ((Square *) fig[0])->vtable->diag_length (fig[0]));
+      fig[i]->vtable->draw (fig[i]);
+
+      printf ("area(%lu) = %f\n",
+              (unsigned long) fig[i],
+              fig[i]->vtable->area (fig[i]));
+
+      printf ("diag_length(%lu) = %f\n",
+              (unsigned long) fig[i],
+              ((Square *) fig[i])->vtable->diag_length (fig[i]));
+
+      puts ("---\n");
+    }
 
 /*goto end;
 err:
