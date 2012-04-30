@@ -33,13 +33,16 @@ int main (int argc, char *argv[])
               ((Square *) fig[i])->vtable->diag_length (fig[i]));
 
       puts ("---\n");
+
     }
 
 /*goto end;
 err:
 end:*/
-  fig[0]->vtable->destroy (fig[0]);
-  fig[1]->vtable->destroy (fig[1]);
+  for (i = 0; i < sizeof (fig) / sizeof (Figure *); i++)
+    {
+      fig[i]->vtable->destroy (fig[i]);
+    }
 
   return 0;
 }
