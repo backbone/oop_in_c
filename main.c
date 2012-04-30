@@ -3,7 +3,7 @@
 
 #include "ColoredSquare.h"
 
-int main (int argc, char *argv[])
+int main (void)
 {
   unsigned long i = 0;
   Figure *fig[3];
