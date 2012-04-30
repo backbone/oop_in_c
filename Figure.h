@@ -1,8 +1,6 @@
 #ifndef __FIGURE_H__
 #define __FIGURE_H__
 
-#include <stdio.h>
-
 #include "Object.h"
 
 struct Figure;
