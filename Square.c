@@ -102,13 +102,13 @@ Square* Square_new (double a)
 {
   static Square_interface vtable =
     {
-         (void* (*) (void *)) Square_clone,
-         (void (*) (void *)) Square_destroy,
-         (const char* (*) (Figure *)) Square_type,
-         (void (*) (Figure *)) Square_draw,
-         (double (*) (Figure *)) Square_area,
-         Square_resize,
-         Square_diag_length
+      (void* (*) (void *)) Square_clone,
+      (void (*) (void *)) Square_destroy,
+      (const char* (*) (Figure *)) Square_type,
+      (void (*) (Figure *)) Square_draw,
+      (double (*) (Figure *)) Square_area,
+      Square_resize,
+      Square_diag_length
     };
   Square *square = malloc (sizeof (*square));
 
