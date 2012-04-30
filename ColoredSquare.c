@@ -71,11 +71,11 @@ ColoredSquare* ColoredSquare_new (double a, int color)
 {
   static ColoredSquare_interface vtable =
     {
-         ColoredSquare_clone,
-         Square_destroy,
-         ColoredSquare_type,
-         ColoredSquare_draw,
-         Square_area,
+         (void* (*) (void *)) ColoredSquare_clone,
+         (void (*) (void *)) Square_destroy,
+         (const char* (*) (Figure *)) ColoredSquare_type,
+         (void (*) (Figure *)) ColoredSquare_draw,
+         (double (*) (Figure *)) Square_area,
          Square_resize,
          Square_diag_length,
          ColoredSquare_set_color
