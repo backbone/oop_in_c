@@ -2,7 +2,7 @@
 
 #include "Square.h"
 
-void Square_constructor (void *this, double a)
+void Square_constructor (Square *this, double a)
 {
   printf ("Square_constructor (%lu, %f) called\n",
           (unsigned long) this,
@@ -10,13 +10,13 @@ void Square_constructor (void *this, double a)
   ((Square *) this)->a = a;
 }
 
-void Square_destructor (void *this)
+void Square_destructor (Square *this)
 {
   printf ("Square_destructor (%lu) called\n",
           (unsigned long) this);
 }
 
-void Square_copy (void *to, void *from)
+void Square_copy (Square *to, Square *from)
 {
   printf ("Square_copy (%lu, %lu) called\n",
           (unsigned long) to,
@@ -24,7 +24,7 @@ void Square_copy (void *to, void *from)
   ((Square *) to)->a = ((Square *) from)->a;
 }
 
-void* Square_clone (void *this)
+Square* Square_clone (Square *this)
 {
   Square *square = Square_new (0.0);
   printf ("Square_clone (%lu) called\n",
@@ -37,14 +37,14 @@ void* Square_clone (void *this)
   return square;
 }
 
-void Square_destroy (void *this)
+void Square_destroy (Square *this)
 {
   printf ("Square_destroy (%lu) called\n",
           (unsigned long) this);
   free (this);
 }
 
-const char* Square_type (void *this)
+const char* Square_type (Square *this)
 {
   static const char *square_type_str = "Square";
   printf ("Square_type (%lu) called\n",
@@ -56,7 +56,7 @@ const char* Square_type (void *this)
   return square_type_str;
 }
 
-void Square_draw (void *this)
+void Square_draw (Square *this)
 {
   printf ("Square_draw (%lu) called\n",
           (unsigned long) this);
@@ -64,7 +64,7 @@ void Square_draw (void *this)
           ((Square *) this)->a);
 }
 
-double Square_area (void *this)
+double Square_area (Square *this)
 {
   double area = ((Square *)this)->a * ((Square *)this)->a;
   printf ("Square_area (%lu) called\n",
@@ -76,7 +76,7 @@ double Square_area (void *this)
   return area;
 }
 
-void Square_resize (void *this, double a)
+void Square_resize (Square *this, double a)
 {
   printf ("Square_resize (%lu, %f) called\n",
           (unsigned long) this,
@@ -84,7 +84,7 @@ void Square_resize (void *this, double a)
   ((Square *) this)->a = a;
 }
 
-double Square_diag_length (void *this)
+double Square_diag_length (Square *this)
 {
   double diag_length = ((Square *)this)->a * 1.41421356;
 
@@ -98,7 +98,7 @@ double Square_diag_length (void *this)
 }
 
 /* public */
-void* Square_new (double a)
+Square* Square_new (double a)
 {
   static Square_interface vtable =
     {
@@ -118,7 +118,7 @@ void* Square_new (double a)
           a,
           (unsigned long) square); 
 
-  square->vtable = (void *) &vtable;
+  square->vtable = (Square_interface *) &vtable;
 
 /*goto end;
 err:

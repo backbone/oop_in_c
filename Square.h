@@ -9,25 +9,27 @@ typedef struct Square_data
 
 } Square_data;
 
+struct Square;
+
 typedef struct Square_interface
 {
   Figure_interface;
 
-  void (*resize) (void *this, double a);
-  double (*diag_length) (void *this);
+  void (*resize) (struct Square *this, double a);
+  double (*diag_length) (struct Square *this);
 
 } Square_interface;
 
-void Square_constructor (void *this, double a);
-void Square_destructor (void *this);
-void Square_copy (void *to, void *from);
-void* Square_clone (void *this);
-void Square_destroy (void *this);
-const char* Square_type (void *this);
-void Square_draw (void *this);
-double Square_area (void *this);
-void Square_resize (void *this, double a);
-double Square_diag_length (void *this);
+void Square_constructor (struct Square *this, double a);
+void Square_destructor (struct Square *this);
+void Square_copy (struct Square *to, struct Square *from);
+struct Square* Square_clone (struct Square *this);
+void Square_destroy (struct Square *this);
+const char* Square_type (struct Square *this);
+void Square_draw (struct Square *this);
+double Square_area (struct Square *this);
+void Square_resize (struct Square *this, double a);
+double Square_diag_length (struct Square *this);
 
 /* public */
 typedef struct Square
@@ -38,6 +40,6 @@ typedef struct Square
 
 } Square;
 
-void* Square_new (double a);
+struct Square* Square_new (double a);
 
 #endif // __SQUARE_H__

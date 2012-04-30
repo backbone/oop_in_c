@@ -3,7 +3,7 @@
 
 #include "ColoredSquare.h"
 
-void ColoredSquare_constructor (void *this,
+void ColoredSquare_constructor (ColoredSquare *this,
                                 double a,
                                 int color)
 {
@@ -11,20 +11,20 @@ void ColoredSquare_constructor (void *this,
           (unsigned long) this,
           a,
           color);
-  Square_constructor (this, a);
+  Square_constructor ((Square *) this, a);
   ((ColoredSquare *) this)->color = color;
 }
 
-void ColoredSquare_copy (void *to, void *from)
+void ColoredSquare_copy (ColoredSquare *to, ColoredSquare *from)
 {
   printf ("ColoredSquare_copy (%lu, %lu) called\n",
           (unsigned long) to,
           (unsigned long) from);
-  Square_copy (to, from);
+  Square_copy ((Square *) to, (Square *) from);
   ((ColoredSquare *) to)->color = ((ColoredSquare *) from)->color;
 }
 
-void* ColoredSquare_clone (void *this)
+ColoredSquare* ColoredSquare_clone (ColoredSquare *this)
 {
   ColoredSquare *csquare = ColoredSquare_new (0.0, 0);
   printf ("ColoredSquare_clone (%lu) called\n",
@@ -37,7 +37,7 @@ void* ColoredSquare_clone (void *this)
   return csquare;
 }
 
-const char* ColoredSquare_type (void *this)
+const char* ColoredSquare_type (ColoredSquare *this)
 {
   static const char *csquare_type_str = "ColoredSquare";
   printf ("ColoredSquare_type (%lu) called\n",
@@ -48,7 +48,7 @@ const char* ColoredSquare_type (void *this)
   return csquare_type_str;
 }
 
-void ColoredSquare_draw (void *this)
+void ColoredSquare_draw (ColoredSquare *this)
 {
   printf ("ColoredSquare_draw (%lu) called\n",
           (unsigned long) this);
@@ -57,7 +57,7 @@ void ColoredSquare_draw (void *this)
           ((ColoredSquare *) this)->color);
 }
 
-void ColoredSquare_set_color (void *this, int color)
+void ColoredSquare_set_color (ColoredSquare *this, int color)
 {
   printf ("ColoredSquare_draw (%lu, %d) called\n",
           (unsigned long) this,
@@ -67,7 +67,7 @@ void ColoredSquare_set_color (void *this, int color)
 }
 
 /* public */
-void* ColoredSquare_new (double a, int color)
+ColoredSquare* ColoredSquare_new (double a, int color)
 {
   static ColoredSquare_interface vtable =
     {
@@ -89,7 +89,7 @@ void* ColoredSquare_new (double a, int color)
           color,
           (unsigned long) square); 
 
-  square->vtable = (void *) &vtable;
+  square->vtable = (ColoredSquare_interface *) &vtable;
 
 /*goto end;
 err:

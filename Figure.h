@@ -5,13 +5,15 @@
 
 #include "Object.h"
 
+struct Figure;
+
 typedef struct Figure_interface
 {
   Object_interface;
 
-  const char* (*type) (void *this);
-  void (*draw) (void *this);
-  double (*area) (void *this);
+  const char* (*type) (struct Figure *this);
+  void (*draw) (struct Figure *this);
+  double (*area) (struct Figure *this);
 
 } Figure_interface;
 

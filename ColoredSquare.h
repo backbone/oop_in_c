@@ -11,22 +11,24 @@ typedef struct ColoredSquare_data
 
 } ColoredSquare_data;
 
+struct ColoredSquare;
+
 typedef struct ColoredSquare_interface
 {
   Square_interface;
 
-  void (*set_color) (void *this, int color);
+  void (*set_color) (struct ColoredSquare *this, int color);
 
 } ColoredSquare_interface;
 
-void ColoredSquare_constructor (void *this,
+void ColoredSquare_constructor (struct ColoredSquare *this,
                                 double a,
                                 int color);
-void ColoredSquare_copy (void *to, void *from);
-void* ColoredSquare_clone (void *this);
-const char* ColoredSquare_type (void *this);
-void ColoredSquare_draw (void *this);
-void ColoredSquare_set_color (void *this, int color);
+void ColoredSquare_copy (struct ColoredSquare *to, struct ColoredSquare *from);
+struct ColoredSquare* ColoredSquare_clone (struct ColoredSquare *this);
+const char* ColoredSquare_type (struct ColoredSquare *this);
+void ColoredSquare_draw (struct ColoredSquare *this);
+void ColoredSquare_set_color (struct ColoredSquare *this, int color);
 
 /* public */
 typedef struct ColoredSquare
@@ -37,6 +39,6 @@ typedef struct ColoredSquare
 
 } ColoredSquare;
 
-void* ColoredSquare_new (double a, int color);
+ColoredSquare* ColoredSquare_new (double a, int color);
 
 #endif // __COLORED_SQUARE_H__
