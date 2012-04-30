@@ -40,6 +40,6 @@ typedef struct Square
 
 } Square;
 
-struct Square* Square_new (double a);
+Square* Square_new (double a);
 
 #endif // __SQUARE_H__
