@@ -8,7 +8,7 @@ void Square_constructor (Square *this, double a)
   printf ("Square_constructor (%lu, %f) called\n",
           (unsigned long) this,
           a);
-  ((Square *) this)->a = a;
+  this->a = a;
 }
 
 void Square_destructor (Square *this)
@@ -22,7 +22,7 @@ void Square_copy (Square *to, Square *from)
   printf ("Square_copy (%lu, %lu) called\n",
           (unsigned long) to,
           (unsigned long) from);
-  ((Square *) to)->a = ((Square *) from)->a;
+  to->a = from->a;
 }
 
 Square* Square_clone (Square *this)
@@ -62,12 +62,12 @@ void Square_draw (Square *this)
   printf ("Square_draw (%lu) called\n",
           (unsigned long) this);
   printf ("Drawing Square with %f side\n",
-          ((Square *) this)->a);
+          this->a);
 }
 
 double Square_area (Square *this)
 {
-  double area = ((Square *)this)->a * ((Square *)this)->a;
+  double area = this->a * this->a;
   printf ("Square_area (%lu) called\n",
           (unsigned long) this);
   printf ("Square_area (%lu) returns %f\n",
@@ -82,7 +82,7 @@ void Square_resize (Square *this, double a)
   printf ("Square_resize (%lu, %f) called\n",
           (unsigned long) this,
           a);
-  ((Square *) this)->a = a;
+  this->a = a;
 }
 
 double Square_diag_length (Square *this)
@@ -123,7 +123,7 @@ Square* Square_new (double a)
           a,
           (unsigned long) square); 
 
-  square->vtable = (Square_interface *) &vtable;
+  square->vtable = &vtable;
 
 /*goto end;
 err:

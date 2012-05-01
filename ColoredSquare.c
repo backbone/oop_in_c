@@ -12,7 +12,7 @@ void ColoredSquare_constructor (ColoredSquare *this,
           a,
           color);
   Square_constructor ((Square *) this, a);
-  ((ColoredSquare *) this)->color = color;
+  this->color = color;
 }
 
 void ColoredSquare_copy (ColoredSquare *to, ColoredSquare *from)
@@ -21,7 +21,7 @@ void ColoredSquare_copy (ColoredSquare *to, ColoredSquare *from)
           (unsigned long) to,
           (unsigned long) from);
   Square_copy ((Square *) to, (Square *) from);
-  ((ColoredSquare *) to)->color = ((ColoredSquare *) from)->color;
+  to->color = from->color;
 }
 
 ColoredSquare* ColoredSquare_clone (ColoredSquare *this)
@@ -53,8 +53,8 @@ void ColoredSquare_draw (ColoredSquare *this)
   printf ("ColoredSquare_draw (%lu) called\n",
           (unsigned long) this);
   printf ("Drawing ColoredSquare with %f side and %d color\n",
-          ((ColoredSquare *) this)->a,
-          ((ColoredSquare *) this)->color);
+          this->a,
+          this->color);
 }
 
 void ColoredSquare_set_color (ColoredSquare *this, int color)
@@ -63,7 +63,7 @@ void ColoredSquare_set_color (ColoredSquare *this, int color)
           (unsigned long) this,
           color);
 
-  ((ColoredSquare *) this)->color = color;
+  this->color = color;
 }
 
 /* public */
@@ -95,7 +95,7 @@ ColoredSquare* ColoredSquare_new (double a, int color)
           color,
           (unsigned long) square); 
 
-  square->vtable = (ColoredSquare_interface *) &vtable;
+  square->vtable = &vtable;
 
 /*goto end;
 err:
