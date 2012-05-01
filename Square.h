@@ -22,7 +22,7 @@ typedef struct Square_interface
 
 void Square_constructor (struct Square *this, double a);
 void Square_destructor (struct Square *this);
-void Square_copy (struct Square *to, const struct Square *from);
+void Square_copy (struct Square *dest, const struct Square *src);
 struct Square* Square_clone (const struct Square *this);
 void Square_destroy (struct Square *this);
 const char* Square_type (const struct Square *this);

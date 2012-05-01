@@ -15,13 +15,13 @@ void ColoredSquare_constructor (ColoredSquare *this,
   this->color = color;
 }
 
-void ColoredSquare_copy (ColoredSquare *to, const ColoredSquare *from)
+void ColoredSquare_copy (ColoredSquare *dest, const ColoredSquare *src)
 {
   printf ("ColoredSquare_copy (%lu, %lu) called\n",
-          (unsigned long) to,
-          (unsigned long) from);
-  Square_copy ((Square *) to, (Square *) from);
-  to->color = from->color;
+          (unsigned long) dest,
+          (unsigned long) src);
+  Square_copy ((Square *) dest, (Square *) src);
+  dest->color = src->color;
 }
 
 ColoredSquare* ColoredSquare_clone (const ColoredSquare *this)

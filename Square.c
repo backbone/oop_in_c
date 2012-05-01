@@ -17,12 +17,12 @@ void Square_destructor (Square *this)
           (unsigned long) this);
 }
 
-void Square_copy (Square *to, const Square *from)
+void Square_copy (Square *dest, const Square *src)
 {
   printf ("Square_copy (%lu, %lu) called\n",
-          (unsigned long) to,
-          (unsigned long) from);
-  to->a = from->a;
+          (unsigned long) dest,
+          (unsigned long) src);
+  dest->a = src->a;
 }
 
 Square* Square_clone (const Square *this)
