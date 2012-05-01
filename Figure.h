@@ -9,9 +9,9 @@ typedef struct Figure_interface
 {
   Object_interface;
 
-  const char* (*type) (struct Figure *this);
-  void (*draw) (struct Figure *this);
-  double (*area) (struct Figure *this);
+  const char* (*type) (const struct Figure *this);
+  void (*draw) (const struct Figure *this);
+  double (*area) (const struct Figure *this);
 
 } Figure_interface;
 

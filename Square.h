@@ -16,20 +16,20 @@ typedef struct Square_interface
   Figure_interface;
 
   void (*resize) (struct Square *this, double a);
-  double (*diag_length) (struct Square *this);
+  double (*diag_length) (const struct Square *this);
 
 } Square_interface;
 
 void Square_constructor (struct Square *this, double a);
 void Square_destructor (struct Square *this);
-void Square_copy (struct Square *to, struct Square *from);
-struct Square* Square_clone (struct Square *this);
+void Square_copy (struct Square *to, const struct Square *from);
+struct Square* Square_clone (const struct Square *this);
 void Square_destroy (struct Square *this);
-const char* Square_type (struct Square *this);
-void Square_draw (struct Square *this);
-double Square_area (struct Square *this);
+const char* Square_type (const struct Square *this);
+void Square_draw (const struct Square *this);
+double Square_area (const struct Square *this);
 void Square_resize (struct Square *this, double a);
-double Square_diag_length (struct Square *this);
+double Square_diag_length (const struct Square *this);
 
 /* public */
 typedef struct Square

@@ -3,7 +3,7 @@
 
 typedef struct Object_interface
 {
-  void* (*clone) (void *this);
+  void* (*clone) (const void *this);
   void (*destroy) (void *this);
 
 } Object_interface;

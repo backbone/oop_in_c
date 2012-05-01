@@ -15,7 +15,7 @@ void ColoredSquare_constructor (ColoredSquare *this,
   this->color = color;
 }
 
-void ColoredSquare_copy (ColoredSquare *to, ColoredSquare *from)
+void ColoredSquare_copy (ColoredSquare *to, const ColoredSquare *from)
 {
   printf ("ColoredSquare_copy (%lu, %lu) called\n",
           (unsigned long) to,
@@ -24,7 +24,7 @@ void ColoredSquare_copy (ColoredSquare *to, ColoredSquare *from)
   to->color = from->color;
 }
 
-ColoredSquare* ColoredSquare_clone (ColoredSquare *this)
+ColoredSquare* ColoredSquare_clone (const ColoredSquare *this)
 {
   ColoredSquare *csquare = ColoredSquare_new (0.0, 0);
   printf ("ColoredSquare_clone (%lu) called\n",
@@ -37,7 +37,7 @@ ColoredSquare* ColoredSquare_clone (ColoredSquare *this)
   return csquare;
 }
 
-const char* ColoredSquare_type (ColoredSquare *this)
+const char* ColoredSquare_type (const ColoredSquare *this)
 {
   static const char *csquare_type_str = "ColoredSquare";
   printf ("ColoredSquare_type (%lu) called\n",
@@ -48,7 +48,7 @@ const char* ColoredSquare_type (ColoredSquare *this)
   return csquare_type_str;
 }
 
-void ColoredSquare_draw (ColoredSquare *this)
+void ColoredSquare_draw (const ColoredSquare *this)
 {
   printf ("ColoredSquare_draw (%lu) called\n",
           (unsigned long) this);
@@ -74,12 +74,12 @@ ColoredSquare* ColoredSquare_new (double a, int color)
       {
         {
           {
-            (void* (*) (void *)) ColoredSquare_clone,
+            (void* (*) (const void *)) ColoredSquare_clone,
             (void (*) (void *)) Square_destroy
           },
-          (const char* (*) (Figure *)) ColoredSquare_type,
-          (void (*) (Figure *)) ColoredSquare_draw,
-          (double (*) (Figure *)) Square_area
+          (const char* (*) (const Figure *)) ColoredSquare_type,
+          (void (*) (const Figure *)) ColoredSquare_draw,
+          (double (*) (const Figure *)) Square_area
         },
         Square_resize,
         Square_diag_length

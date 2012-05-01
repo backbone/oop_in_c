@@ -24,10 +24,10 @@ typedef struct ColoredSquare_interface
 void ColoredSquare_constructor (struct ColoredSquare *this,
                                 double a,
                                 int color);
-void ColoredSquare_copy (struct ColoredSquare *to, struct ColoredSquare *from);
-struct ColoredSquare* ColoredSquare_clone (struct ColoredSquare *this);
-const char* ColoredSquare_type (struct ColoredSquare *this);
-void ColoredSquare_draw (struct ColoredSquare *this);
+void ColoredSquare_copy (struct ColoredSquare *to, const struct ColoredSquare *from);
+struct ColoredSquare* ColoredSquare_clone (const struct ColoredSquare *this);
+const char* ColoredSquare_type (const struct ColoredSquare *this);
+void ColoredSquare_draw (const struct ColoredSquare *this);
 void ColoredSquare_set_color (struct ColoredSquare *this, int color);
 
 /* public */

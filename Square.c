@@ -17,7 +17,7 @@ void Square_destructor (Square *this)
           (unsigned long) this);
 }
 
-void Square_copy (Square *to, Square *from)
+void Square_copy (Square *to, const Square *from)
 {
   printf ("Square_copy (%lu, %lu) called\n",
           (unsigned long) to,
@@ -25,7 +25,7 @@ void Square_copy (Square *to, Square *from)
   to->a = from->a;
 }
 
-Square* Square_clone (Square *this)
+Square* Square_clone (const Square *this)
 {
   Square *square = Square_new (0.0);
   printf ("Square_clone (%lu) called\n",
@@ -45,7 +45,7 @@ void Square_destroy (Square *this)
   free (this);
 }
 
-const char* Square_type (Square *this)
+const char* Square_type (const Square *this)
 {
   static const char *square_type_str = "Square";
   printf ("Square_type (%lu) called\n",
@@ -57,7 +57,7 @@ const char* Square_type (Square *this)
   return square_type_str;
 }
 
-void Square_draw (Square *this)
+void Square_draw (const Square *this)
 {
   printf ("Square_draw (%lu) called\n",
           (unsigned long) this);
@@ -65,7 +65,7 @@ void Square_draw (Square *this)
           this->a);
 }
 
-double Square_area (Square *this)
+double Square_area (const Square *this)
 {
   double area = this->a * this->a;
   printf ("Square_area (%lu) called\n",
@@ -85,7 +85,7 @@ void Square_resize (Square *this, double a)
   this->a = a;
 }
 
-double Square_diag_length (Square *this)
+double Square_diag_length (const Square *this)
 {
   double diag_length = ((Square *)this)->a * 1.41421356;
 
@@ -105,12 +105,12 @@ Square* Square_new (double a)
     {
       {
         {
-          (void* (*) (void *)) Square_clone,
+          (void* (*) (const void *)) Square_clone,
           (void (*) (void *)) Square_destroy
         },
-        (const char* (*) (Figure *)) Square_type,
-        (void (*) (Figure *)) Square_draw,
-        (double (*) (Figure *)) Square_area
+        (const char* (*) (const Figure *)) Square_type,
+        (void (*) (const Figure *)) Square_draw,
+        (double (*) (const Figure *)) Square_area
       },
       Square_resize,
       Square_diag_length
