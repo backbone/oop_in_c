@@ -5,11 +5,12 @@
 #include "Polygon.h"
 
 /* considered to be protected */
-void Polygon_constructor (Polygon *this, const struct point *points, int npoints)
+void Polygon_constructor (Polygon *this, const struct point *points, size_t npoints)
 {
   Figure_constructor ((Figure *) this);
   this->npoints = npoints;
-  this->points = strdup (points, npoints * sizeof (struct point));
+  this->points = malloc (npoints * sizeof (struct point));
+  memcpy (this->points, points, npoints * sizeof (struct point));
 }
 
 void Polygon_destructor (Polygon *this)
@@ -19,8 +20,10 @@ void Polygon_destructor (Polygon *this)
 
 void Polygon_copy (Polygon *dest, const Polygon *src)
 {
+  free (dest->points);
   dest->npoints = src->npoints;
-  dest->points = strdup (src->points, src->npoints * sizeof (struct point));
+  dest->points = malloc (src->npoints * sizeof (struct point));
+  memcpy (dest->points, src->points, src->npoints * sizeof (struct point));
 }
 
 /* private */
@@ -32,7 +35,7 @@ static const char* __Polygon_type ()
 static Polygon* __Polygon_clone (const Polygon *this)
 {
   Polygon *poly = malloc (sizeof (Polygon));
-  memset (poly, 0, sizeof (
+  memset (poly, 0, sizeof (Polygon));
   Polygon_copy (poly, this);
   return poly;
 }
@@ -40,12 +43,12 @@ static Polygon* __Polygon_clone (const Polygon *this)
 static void __Polygon_destroy (Polygon *this)
 {
   Polygon_destructor (this);
-  g_free (this);
+  free (this);
 }
 
-static void __Polygon_draw (const Polygon *this)
+void __Polygon_draw (const Polygon *this)
 {
-  int i = 0;
+  size_t i = 0;
 
   for (i = 0; i < this->npoints; i++)
     {
@@ -54,10 +57,10 @@ static void __Polygon_draw (const Polygon *this)
   printf ("{%f;%f}, ", this->points[0].x, this->points[0].y);
 }
 
-static double __Polygon_area (const Polygon *this)
+double __Polygon_area (const Polygon *this)
 {
-  double s = 0.0, x, y; 
-  int i = 0;
+  double s = 0.0;
+  size_t i = 0;
 
   for (i = 0; i < this->npoints; i++)
     {
@@ -70,13 +73,13 @@ static double __Polygon_area (const Polygon *this)
   // S=abs(сумма{(x[i+1]-x[i])*(y[i+1]+y[i])/2})
 }
 
-static double __Polygon_max_diag (const Polygon *this)
+double __Polygon_max_diag (const Polygon *this)
 {
   double diag = 0.0,
          tmp = 0.0,
          tmp1 = 0.0,
          tmp2 = 0.0;
-  int i = 0, j = 0;
+  size_t i = 0, j = 0;
 
   for (i = 0; i < this->npoints - 2; i++)
     {
@@ -96,9 +99,20 @@ static double __Polygon_max_diag (const Polygon *this)
 }
 
 /* public */
-Polygon* Polygon_new (const struct point *points, int npoints)
+Polygon* Polygon_new (const struct point *points, size_t npoints)
 {
-  Polygon *poly = g_new0 (Polygon, 1);
+  static struct Polygon_vtable vtable = {
+    __Polygon_type,
+    __Polygon_clone,
+    __Polygon_destroy,
+    __Polygon_draw,
+    __Polygon_area,
+    __Polygon_max_diag
+  };
+
+  Polygon *poly = malloc (sizeof (Polygon));
+  memset (poly, 0, sizeof (Polygon));
   Polygon_constructor (poly, points, npoints);
+  poly->vtable = &vtable;
   return poly;
 }

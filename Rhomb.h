@@ -25,13 +25,13 @@ typedef struct Rhomb
   } *vtable;
 
   /* derived from Polygon */
-  int npoints;
+  size_t npoints;
 
   struct point *points;
 
 } Rhomb;
 
-Rhomb* Rhomb_new (const struct point *points, int npoints);
+Rhomb* Rhomb_new (const struct point *points);
 
 static inline const char* Rhomb_type (const Rhomb *this)
 {
@@ -69,7 +69,7 @@ static inline int Rhomb_is_square (const Rhomb *this)
 }
 
 /* considered to be protected */
-void Rhomb_constructor (Rhomb *this, const struct point *points, int npoints);
+void Rhomb_constructor (Rhomb *this, const struct point *points);
 void Rhomb_destructor (Rhomb *this);
 void Rhomb_copy (Rhomb *dest, const Rhomb *src);
 

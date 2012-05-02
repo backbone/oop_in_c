@@ -1,6 +1,8 @@
 #ifndef __POLYGON_H__
 #define __POLYGON_H__
 
+#include <stdlib.h>
+
 #include "Figure.h"
 
 typedef struct Polygon
@@ -22,7 +24,7 @@ typedef struct Polygon
   } *vtable;
 
   /* Polygon fields */
-  int npoints;
+  size_t npoints;
 
   struct point
   {
@@ -32,7 +34,7 @@ typedef struct Polygon
 
 } Polygon;
 
-Polygon* Polygon_new (const struct point *points, int npoints);
+Polygon* Polygon_new (const struct point *points, size_t npoints);
 
 static inline const char* Polygon_type (const Polygon *this)
 {
@@ -65,8 +67,11 @@ static inline double Polygon_max_diag (const Polygon *this)
 }
 
 /* considered to be protected */
-void Polygon_constructor (Polygon *this, const struct point *points, int npoints);
+void Polygon_constructor (Polygon *this, const struct point *points, size_t npoints);
 void Polygon_destructor (Polygon *this);
 void Polygon_copy (Polygon *dest, const Polygon *src);
+void __Polygon_draw (const Polygon *this);
+double __Polygon_area (const Polygon *this);
+double __Polygon_max_diag (const Polygon *this);
 
 #endif // __POLYGON_H__
