@@ -37,13 +37,13 @@ static int __Rhomb_is_square (const Rhomb *this)
 }
 
 /* public */
-Rhomb* Rhomb_new (const struct point *points)
+Rhomb* Rhomb_new (const struct point *points, int npoints)
 {
 
 }
 
 /* considered to be protected */
-void Rhomb_constructor (Rhomb *this, const struct point *points)
+void Rhomb_constructor (Rhomb *this, const struct point *points, int npoints)
 {
 
 }

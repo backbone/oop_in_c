@@ -22,6 +22,8 @@ typedef struct Polygon
   } *vtable;
 
   /* Polygon fields */
+  int npoints;
+
   struct point
   {
     double x, y;
@@ -30,7 +32,7 @@ typedef struct Polygon
 
 } Polygon;
 
-Polygon* Polygon_new (const struct point *points);
+Polygon* Polygon_new (const struct point *points, int npoints);
 
 static inline const char* Polygon_type (const Polygon *this)
 {
@@ -63,7 +65,7 @@ static inline double Polygon_max_diag (const Polygon *this)
 }
 
 /* considered to be protected */
-void Polygon_constructor (Polygon *this, const struct point *points);
+void Polygon_constructor (Polygon *this, const struct point *points, int npoints);
 void Polygon_destructor (Polygon *this);
 void Polygon_copy (Polygon *dest, const Polygon *src);
 
