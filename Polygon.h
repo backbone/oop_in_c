@@ -63,7 +63,7 @@ static inline double Polygon_max_diag (const Polygon *this)
 }
 
 /* considered to be protected */
-void Polygon_constructor (Polygon *this);
+void Polygon_constructor (Polygon *this, const struct point *points);
 void Polygon_destructor (Polygon *this);
 void Polygon_copy (Polygon *dest, const Polygon *src);
 

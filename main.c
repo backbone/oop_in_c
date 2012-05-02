@@ -4,6 +4,7 @@
 
 int main (void)
 {
+  Polygon_destroy (NULL);
 /*  unsigned long i = 0;
   Figure *fig[3];
 

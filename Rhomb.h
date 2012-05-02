@@ -67,7 +67,7 @@ static inline int Rhomb_is_square (const Rhomb *this)
 }
 
 /* considered to be protected */
-void Rhomb_constructor (Rhomb *this);
+void Rhomb_constructor (Rhomb *this, const struct point *points);
 void Rhomb_destructor (Rhomb *this);
 void Rhomb_copy (Rhomb *dest, const Rhomb *src);
 

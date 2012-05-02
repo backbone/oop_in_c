@@ -96,7 +96,9 @@ clean:
 #________________________________|
 target_objs0 = \
 	main.o \
-	Figure.o
+	Figure.o \
+	Polygon.o \
+	Rhomb.o
 
 $(TARGET0): $(target_objs0)
 	$(CC) $(LDFLAGS) -o $@ $(target_objs0)
@@ -108,6 +110,19 @@ main.o: \
 	Object.h \
 	Polygon.h \
 	Rhomb.h
+
+Rhomb.o: \
+	Rhomb.c \
+	Figure.h \
+	Object.h \
+	Polygon.h \
+	Rhomb.h
+
+Polygon.o: \
+	Polygon.c \
+	Figure.h \
+	Object.h \
+	Polygon.h
 
 Figure.o: \
 	Figure.c \
