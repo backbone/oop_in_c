@@ -31,6 +31,7 @@ static Rhomb* __Rhomb_clone (const Rhomb *this)
   Rhomb *rhomb = malloc (sizeof (Rhomb));
   memset (rhomb, 0, sizeof (Rhomb));
   Rhomb_copy (rhomb, this);
+  rhomb->vtable = this->vtable;
   return rhomb;
 }
 
@@ -67,7 +68,7 @@ static int __Rhomb_is_square (const Rhomb *this)
   tmp2 = this->points[1].y - this->points[3].y;
   diag2 = tmp1 * tmp1 + tmp2 * tmp2;
 
-  return (diag1 == diag2);
+  return (fabs (diag1 - diag2) < 1e-12);
 }
 
 /* public */

@@ -37,6 +37,7 @@ static Polygon* __Polygon_clone (const Polygon *this)
   Polygon *poly = malloc (sizeof (Polygon));
   memset (poly, 0, sizeof (Polygon));
   Polygon_copy (poly, this);
+  poly->vtable = this->vtable;
   return poly;
 }
 
@@ -54,7 +55,7 @@ void __Polygon_draw (const Polygon *this)
     {
       printf ("{%f;%f}, ", this->points[i].x, this->points[i].y);
     }
-  printf ("{%f;%f}, ", this->points[0].x, this->points[0].y);
+  printf ("{%f;%f}\n", this->points[0].x, this->points[0].y);
 }
 
 double __Polygon_area (const Polygon *this)
