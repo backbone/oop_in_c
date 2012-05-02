@@ -32,11 +32,11 @@ static inline void Figure_destroy (Figure *this)
 {
   this->vtable->destroy (this);
 }
-static inline void Figure_draw (const struct Figure *this)
+static inline void Figure_draw (const Figure *this)
 {
   this->vtable->draw (this);
 }
-static inline double (*area) (const struct Figure *this)
+static inline double Figure_area (const Figure *this)
 {
   return this->vtable->area (this);
 }
@@ -44,6 +44,6 @@ static inline double (*area) (const struct Figure *this)
 /* considered to be protected */
 void Figure_constructor (Figure *this);
 void Figure_destructor (Figure *this);
-void Figure_copy (struct Figure *dest, const struct Figure *src);
+void Figure_copy (Figure *dest, const Figure *src);
 
 #endif // __FIGURE_H__

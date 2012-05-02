@@ -30,7 +30,7 @@ typedef struct Polygon
 
 } Polygon;
 
-Polygon* Polygon_new (const struct *points);
+Polygon* Polygon_new (const struct point *points);
 
 static inline const char* Polygon_type (const Polygon *this)
 {
@@ -59,7 +59,7 @@ static inline double Polygon_area (const Polygon *this)
 
 static inline double Polygon_max_diag (const Polygon *this)
 {
-  return this->max_diag (this);
+  return this->vtable->max_diag (this);
 }
 
 /* considered to be protected */

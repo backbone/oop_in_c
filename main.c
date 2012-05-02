@@ -1,10 +1,10 @@
 #include <stdio.h>
 
-#include "ColoredSquare.h"
+#include "Rhomb.h"
 
 int main (void)
 {
-  unsigned long i = 0;
+/*  unsigned long i = 0;
   Figure *fig[3];
 
   fig[0] = (Figure *) Square_new (1);
@@ -38,10 +38,11 @@ int main (void)
 /*goto end;
 err:
 end:*/
-  for (i = 0; i < sizeof (fig) / sizeof (Figure *); i++)
+/*  for (i = 0; i < sizeof (fig) / sizeof (Figure *); i++)
     {
       fig[i]->vtable->destroy (fig[i]);
     }
+*/
 
   return 0;
 }

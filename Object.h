@@ -7,7 +7,7 @@ typedef struct Object
   {
     /* Object methods */
     const char* (*type) ();
-    struct Object* (*clone) (const Object *this);
+    struct Object* (*clone) (const struct Object *this);
     void (*destroy) (struct Object *this);
   
   } *vtable;
