@@ -1,11 +1,17 @@
 #ifndef __OBJECT_H__
 #define __OBJECT_H__
 
-typedef struct Object_interface
+typedef struct Object
 {
-  void* (*clone) (const void *this);
-  void (*destroy) (void *this);
+  struct Object_vtable
+  {
+    /* Object methods */
+    const char* (*type) ();
+    struct Object* (*clone) (const Object *this);
+    void (*destroy) (struct Object *this);
+  
+  } *vtable;
 
-} Object_interface;
+} Object;
 
 #endif // __OBJECT_H__

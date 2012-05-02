@@ -3,22 +3,47 @@
 
 #include "Object.h"
 
-struct Figure;
-
-typedef struct Figure_interface
-{
-  Object_interface;
-
-  const char* (*type) (const struct Figure *this);
-  void (*draw) (const struct Figure *this);
-  double (*area) (const struct Figure *this);
-
-} Figure_interface;
-
 typedef struct Figure
 {
-  Figure_interface *vtable;
+  struct Figure_vtable
+  {
+    /* derived from Object */
+    const char* (*type) ();
+    struct Figure* (*clone) (const struct Figure *this);
+    void (*destroy) (struct Figure *this);
+
+    /* Figure virtual methods */
+    void (*draw) (const struct Figure *this);
+    double (*area) (const struct Figure *this);
+
+  } *vtable;
 
 } Figure;
+
+static inline const char* Figure_type (const Figure *this)
+{
+  return this->vtable->type ();
+}
+static inline Figure* Figure_clone (const Figure *this)
+{
+  return this->vtable->clone (this);
+}
+static inline void Figure_destroy (Figure *this)
+{
+  this->vtable->destroy (this);
+}
+static inline void Figure_draw (const struct Figure *this)
+{
+  this->vtable->draw (this);
+}
+static inline double (*area) (const struct Figure *this)
+{
+  return this->vtable->area (this);
+}
+
+/* considered to be protected */
+void Figure_constructor (Figure *this);
+void Figure_destructor (Figure *this);
+void Figure_copy (struct Figure *dest, const struct Figure *src);
 
 #endif // __FIGURE_H__
