@@ -69,7 +69,7 @@ double __Polygon_area (const Polygon *this)
            this->points[(i + 1) % this->npoints].x * this->points[i].y;
     }
 
-  return s * 0.5;
+  return fabs (s) * 0.5;
   // Trapezium rule for convex and non-convex polygons
   // S=abs(сумма{(x[i+1]-x[i])*(y[i+1]+y[i])/2})
 }
